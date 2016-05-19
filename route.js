@@ -7,6 +7,7 @@ var usersGetReq = require('./controller/users/get');
 var usersPostReq = require('./controller/users/post');
 var filesGetReq = require('./controller/files/get');
 var filesPostReq = require('./controller/files/post');
+var download = require('./controller/files/download');
 
 function router(app) {
     app.use(route.get('/', home));
@@ -17,6 +18,7 @@ function router(app) {
     app.use(route.get('/logout', logout));
     app.use(route.get('/users/:action', usersGetReq));
     app.use(route.post('/users/:action', usersPostReq));
+    app.use(route.get('/files/download/:id', download));
     
     // custom 404
     app.use(function *(next){
