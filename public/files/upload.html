@@ -1,0 +1,33 @@
+{% extends "../layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="/public/assets/css/upload.css">
+
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data" class="upload-form">
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>选择文件</span>
+                <input type="file" name="file">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea id="attr-tree" name="attr-tree" class="materialize-textarea"></textarea>
+                <label for="attr-tree">属性树</label>
+            </div>
+        </div>
+        
+        <button disabled class="btn waves-effect waves-light disabled" type="submit" name="action">
+            提交
+        </button>
+    </form>
+    
+</div>
+
+<script src="/public/assets/js/files/upload.js" defer></script>
+{% endblock %}

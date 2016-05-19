@@ -1,0 +1,9 @@
+.login-form {
+    width: 400px;
+    margin: 12% auto;
+}
+
+.login-form .login-submit {
+    float: right;
+    margin-right: 10px;
+}

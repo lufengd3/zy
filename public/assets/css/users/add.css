@@ -1,0 +1,9 @@
+.add-user-form {
+    width: 400px;
+    margin: 12% auto;
+}
+
+.add-user-form .add-user-submit {
+    float: right;
+    margin-right: 10px;
+}

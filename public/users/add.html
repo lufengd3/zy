@@ -1,0 +1,48 @@
+{% extends "../layout.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/public/assets/css/users/add.css">
+  
+  <div class="add-user-form">
+    <form class="col" action="" method="POST">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" name="username" type="text" class="validate" maxlength="16" value="{{ usernmae }}">
+          <label for="username">用户名</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" value="{{ password }}">
+          <label for="password">密码</label>
+        </div>
+      </div>
+      
+      <!--<div class="row">
+        <div class="input-field col s12">
+            <select name="user_group">
+                <option value="" disabled selected>用户组</option>
+                <option value="1">Group 1</option>
+                <option value="2">Group 2</option>
+                <option value="3">Group 3</option>
+            </select>
+        </div>
+      </div>-->
+      
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">用户属性</label>
+        </div>
+      </div>
+      
+      <button disabled class="btn waves-effect waves-light disabled add-user-submit" type="submit" name="action">
+        提交
+      </button>
+    </form>
+  </div>
+  
+  <script src="/public/assets/js/users/add.js" defer></script>
+{% endblock %}

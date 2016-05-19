@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <link rel="stylesheet" href="/public/assets/css/login.css">
+  
+  <div class="login-form">
+    <form class="col s12">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" name="username" type="text" class="validate" maxlength="16" value="{{ usernmae }}">
+          <label for="username">用户名</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" value="{{ password }}">
+          <label for="password">密码</label>
+        </div>
+      </div>
+      
+      <button disabled class="btn waves-effect waves-light disabled login-submit" type="submit" name="action">
+        登录
+      </button>
+    </form>
+  </div>
+  
+  <script src="/public/assets/js/login.js" defer></script>
+{% endblock %}

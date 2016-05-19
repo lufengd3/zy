@@ -1,0 +1,8 @@
+.upload-form {
+    width: 500px;
+    margin: 100px auto;
+}
+
+.upload-form button[type="submit"] {
+    float: right;
+}

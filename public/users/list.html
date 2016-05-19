@@ -1,0 +1,33 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+<div class="container">
+    <table class="highlight centered user-table">
+        <thead>
+            <tr>
+                <th data-field="name">用户名</th>
+                <th data-field="size">用户组</th>
+                <th data-field="time">添加时间</th>
+                <th data-field="manage">管理</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, val in users %}
+                <tr>
+                    <td>{{ val.username }}</td>
+                    <td>{{ val.user_group }}</td>
+                    <td>{{ val.create_date | date('Y-m-d H:m:s') }}</td>
+                    <td>
+                        {% if val.username != username %}
+                            <a href="#" class="del-user" uid="{{ val.id }}">删除</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="/public/assets/js/users/manage.js" defer></script>
+{% endblock %}

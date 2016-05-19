@@ -1,0 +1,57 @@
+{% extends "../layout.html" %}
+
+{% block content %}
+<div class="container">
+    <table class="highlight file-list">
+        <thead>
+            <tr>
+                <th data-field="check">
+                    <input type="checkbox" id="check-all"/>
+                    <label for="check-all">全选</label>
+                </th>
+                <th data-field="name">文件名</th>
+                <th data-field="size">文件大小</th>
+                <th data-field="duration">加密用时</th>
+                <th data-field="duration">解密用时</th>
+                <th data-field="time">上传时间</th>
+                <th data-field="action">操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, val in files %}
+                <tr>
+                    <td>
+                        <input type="checkbox" id="file-{{ val.id }}" />
+                        <label for="file-{{ val.id }}"></label>
+                    </td>
+                    <td class="file-name">{{ val.file_name }}</td>
+                    <td class="file-size">{{ val.size }}</td>
+                    <td class="enc-time">{{ val.enc_time }}</td>
+                    <td class="dec-time">{{ val.dec_time }}</td>
+                    <td>{{ val.upload_time | date('Y-m-d H:m:s') }}</td>
+                    <td>
+                        <a href="#" class="dec-file" file-id="{{ val.id }}">解密</a>
+                        <a href="#" class="del-file" file-id="{{ val.id }}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="waves-effect waves-light btn modal-trigger dec-chart-btn" href="#chart-modal" 
+        style="float: right">解密时间统计图</a>
+    <a class="waves-effect waves-light btn modal-trigger enc-chart-btn" href="#chart-modal" 
+        style="float: right; margin-right: 15px;">加密时间统计图</a>
+    
+    <div id="chart-modal" class="modal">
+        <div class="modal-content">
+            <h5></h5>
+            <div id="time-chart"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/public/assets/js/g2.js" defer></script>
+<script src="/public/assets/js/files/list.js" defer></script>
+<script src="/public/assets/js/files/chart.js" defer></script>
+{% endblock %}
