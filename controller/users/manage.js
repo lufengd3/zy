@@ -11,7 +11,7 @@ function queryDB(sql) {
 }
 
 module.exports = function *(ctx) {
-    var sql = `SELECT id, username, user_group, create_date FROM users`;
+    var sql = `SELECT id, username, user_attr, create_date FROM users`;
     var users = yield queryDB(sql);
     
     ctx.body = yield render('users/list', {username: ctx.session.username, users: users});

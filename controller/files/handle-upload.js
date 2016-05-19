@@ -8,16 +8,26 @@ var moment = require('moment');
 var baseDir = require('../../config').baseDir;
 
 function *handleUpload(ctx) {
-  var parts = parse(ctx, {autoFields: true});
-  var part = yield parts;
   var dateTime = moment().format('YYYYMMDDHHmmss');
-  var fileName = dateTime + '-' + part.filename;
-  var fileDirName = String(Math.random()).slice('2');
+  var randomStr = String(Math.random()).slice('2');
+  var tmpFilePath = path.join('/tmp', randomStr);
+
+  var parts = parse(ctx, {autoFields: true});
+  var part, fileName;
+  
+  while (part = yield parts) {
+    part.pipe(fs.createWriteStream(tmpFilePath));  
+  
+    fileName = dateTime + '-' + part.filename;
+  }
+  
+  var fileDirName = randomStr;
   var fileDir = path.join(baseDir, fileDirName);
   var filePath = path.join(fileDir, fileName);
+  var attrTree = parts.field["attr-tree"];
   
   fs.mkdirSync(fileDir);
-  part.pipe(fs.createWriteStream(filePath));  
+  fs.renameSync(tmpFilePath, filePath);
   
   try {
     process.chdir(fileDir);
@@ -26,29 +36,31 @@ function *handleUpload(ctx) {
   catch (err) {
     console.log('chdir: ' + err);
   }
-  
+      
   yield new Promise((resolve, reject) => {
-    exec(`cpabe-enc pub_key ${filePath} '${parts.field["attr-tree"]}'`, (err, stdout, stderr) => {
-      if (err) {
-        throw err;
-      } 
-      
-      var encTime = stdout;
-      
-      fileName += '.cpabe';
-      filePath += '.cpabe';
-      
-      var sql = `INSERT INTO files VALUES ('', '${fileDirName}', '${fileName}', '${encTime}',
-                '-', now(), '${parts.field["attr-tree"]}', '${getFilesizeInKB(filePath)}')`;
-      
-      db.query(sql, (err, rows, fields) => {
-          if (err) throw err;
+      var cmd = `cpabe-enc pub_key ${filePath} '${attrTree}'`;
+      exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+          throw err;
+        } 
+        
+        fileName += '.cpabe';
+        filePath += '.cpabe';
+        
+        var encTime = stdout;
+        var escapedAttr = escape(attrTree);
+        
+        var sql = `INSERT INTO files VALUES ('', '${fileDirName}', '${fileName}', '${encTime}',
+                  '-', now(), '${escapedAttr}', '${getFilesizeInKB(filePath)}')`;
+        
+        db.query(sql, (err, rows, fields) => {
+            if (err) throw err;
 
-          ctx.redirect('/files/list');
-          resolve();
+            ctx.redirect('/files/list');
+            resolve();
+        });
       });
-    });
-  });
+    });  
     
 }
 
@@ -60,4 +72,16 @@ function getFilesizeInKB(filename) {
   return size;
 }
 
+function *handleForm(ctx, tmpFilePath) {
+  // return new Promise((resolve, reject) => {
+  //   var parts = parse(ctx, {autoFields: true});
+  //   var part;
+    
+  //   while (part = yield parts) {
+  //     part.pipe(fs.createWriteStream(tmpFilePath));  
+  //   }
+    
+  //   return {part: part, parts: parts};
+  // })
+}
 module.exports = handleUpload;

@@ -46,9 +46,15 @@ $(document).ready(function() {
     
     decBtn.on('click', function(e) {
         var id = $(this).attr('file-id');
+        var decField = $(this).parents('tr').find('.dec-time');
         $.post('/files/dec/', {id: id})
             .done(function(data) {
-                // console.log('success ' + data.status);
+                if (data.time) {
+                    alert('解密时间： ' + data.time);
+                    decField.text(data.time);
+                } else {
+                    alert('属性不满足，解密失败');
+                }
             })
             .fail(function(err) {
                 alert('服务器发生错误.');

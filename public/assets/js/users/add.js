@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('.add-user-form select').material_select();
     
     var submitBtn = $('.add-user-form .add-user-submit');
-    var formInputs = $('.add-user-form input');
+    var formInputs = $('.add-user-form .user-data');
     var updateBtn = $('.update-user');
     var delBtn = $('.del-user');
 
@@ -13,7 +13,7 @@ $(document).ready(function() {
         var empty = false;
 
         formInputs.each(function(index, elm) {
-            if (!elm.value || elm.value === '用户组') {
+            if (!elm.value) {
                 empty = true;
             }
         });

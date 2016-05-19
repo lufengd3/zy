@@ -1,18 +1,17 @@
 var handleUpload = require('./handle-upload');
 var delFile = require('./delete');
+var decFile = require('./dec');
 
 module.exports = function *(action) {
-    if (this.session.username !== 'admin') {
-        this.status = 403;
-        this.redirect('/');
-    }
-
     switch(action) {
         case 'upload':
             yield handleUpload(this);
             break;
         case 'delete':
             yield delFile(this);        
+            break;
+        case 'dec':
+            yield decFile(this);        
             break;
         default:
             break;

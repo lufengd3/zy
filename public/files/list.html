@@ -32,16 +32,18 @@
                     <td>{{ val.upload_time | date('Y-m-d H:m:s') }}</td>
                     <td>
                         <a href="#" class="dec-file" file-id="{{ val.id }}">解密</a>
-                        <a href="#" class="del-file" file-id="{{ val.id }}">删除</a>
+                        {% if username === "admin" %}
+                            <a href="#" class="del-file" file-id="{{ val.id }}">删除</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     <a class="waves-effect waves-light btn modal-trigger dec-chart-btn" href="#chart-modal" 
-        style="float: right">解密时间统计图</a>
+        style="float: right; margin-top: 30px">解密时间统计图</a>
     <a class="waves-effect waves-light btn modal-trigger enc-chart-btn" href="#chart-modal" 
-        style="float: right; margin-right: 15px;">加密时间统计图</a>
+        style="float: right; margin-right: 15px; margin-top: 30px">加密时间统计图</a>
     
     <div id="chart-modal" class="modal">
         <div class="modal-content">

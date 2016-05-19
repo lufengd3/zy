@@ -3,7 +3,8 @@ var db = require('../../db');
 
 module.exports = function *(ctx) {
     var formData = yield parse(ctx);
-    var sql = `INSERT INTO users VALUES('', '${formData.username}', '${formData.password}', '${formData.user_group}', now())`;
+    var attr = escape(formData['user-attr']);
+    var sql = `INSERT INTO users VALUES('', '${formData.username}', '${formData.password}', '${attr}', now())`;
     
     yield new Promise((resolve, reject) => {
         db.query(sql, (err, rows) => {
