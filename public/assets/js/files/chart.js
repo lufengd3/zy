@@ -81,7 +81,8 @@ $(document).ready(function() {
         var row = $(elm).parents('tr');
         var fileName = row.find(rowClass).text();
         data.row = fileName.slice(fileName.indexOf('-') + 1);
-        data.col = row.find(colClass).text().slice(0, -1); 
+        var time = row.find(colClass).text();
+        data.col = Number(time.trim().slice(0, -1)); 
         
         return data;
     }

@@ -51,7 +51,7 @@ $(document).ready(function() {
         $.post('/files/dec/', {id: id})
             .done(function(data) {
                 if (data.time) {
-                    alert('解密时间： ' + data.time);
+                    // alert('解密时间： ' + data.time);
                     decField.text(data.time);
                     elm.html('<a href="/files/download/' + id + '" target="_blank">下载</a>');
                     elm.off('click');
