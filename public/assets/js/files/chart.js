@@ -82,7 +82,7 @@ $(document).ready(function() {
         var fileName = row.find(rowClass).text();
         data.row = fileName.slice(fileName.indexOf('-') + 1);
         var time = row.find(colClass).text();
-        data.col = Number(time.trim().slice(0, -1)); 
+        data.col = Number(time.trim().slice(0, -1)) * 1000000; 
         
         return data;
     }
