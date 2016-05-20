@@ -21,7 +21,7 @@ $(document).ready(function() {
         }
         var col = {
             className: '.enc-time',
-            title: '加密时间 (s)'
+            title: '加密时间 (us)'
         }
         var header = '加密时间统计图';
         
@@ -37,7 +37,7 @@ $(document).ready(function() {
         }
         var col = {
             className: '.dec-time',
-            title: '解密时间 (s)'
+            title: '解密时间 (us)'
         }
         var header = '解密时间统计图';
         
