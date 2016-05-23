@@ -17,6 +17,7 @@ module.exports = function *(id) {
     var fileName = data[0]['file_name'].slice(0, -6);
     var filePath = path.join('/tmp', fileName);
     // this.body = 'hello ' + filePath;    
-    this.type = "image/*";
+    // this.type = "image/*";
+    this.set('Content-disposition', `attachment; filename=${fileName}`);
     this.body = fs.createReadStream(filePath);
 };
