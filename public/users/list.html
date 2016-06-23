@@ -6,7 +6,9 @@
         <thead>
             <tr>
                 <th data-field="name">用户名</th>
-                <th data-field="size">用户属性</th>
+                <th data-field="age">年龄</th>
+                <th data-field="gender">性别</th>
+                <th data-field="title">职称</th>
                 <th data-field="time">添加时间</th>
                 <th data-field="manage">操作</th>
             </tr>
@@ -16,7 +18,10 @@
             {% for key, val in users %}
                 <tr>
                     <td>{{ val.username }}</td>
-                    <td>{{ val.user_attr | unescape }}</td>
+                    <!--<td>{{ val.user_attr | unescape }}</td>-->
+                    <td>{{ val.user_attr.length }}</td>
+                    <td>{{ ['男', '女'][val.user_attr.length % 2] }}</td>
+                    <td>{{ ['讲师', '教授', '副教授'][val.user_attr.length % 3] }}</td>
                     <td>{{ val.create_date | date('Y-m-d H:m:s') }}</td>
                     <td>
                         {% if val.username != username %}

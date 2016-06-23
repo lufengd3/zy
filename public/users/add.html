@@ -19,24 +19,44 @@
           <label for="password">密码</label>
         </div>
       </div>
-      
-      <!--<div class="row">
-        <div class="input-field col s12">
-            <select name="user_group">
-                <option value="" disabled selected>用户组</option>
-                <option value="1">Group 1</option>
-                <option value="2">Group 2</option>
-                <option value="3">Group 3</option>
-            </select>
-        </div>
-      </div>-->
-      
+
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="user-attr" name="user-attr" class="materialize-textarea user-data"></textarea>
-          <label for="user-attr">用户属性</label>
+          <input id="age" name="age" type="number" class="validate user-data" min="1" max="99" value="{{ age }}">
+          <label for="age" data-error="有效范围 1-99">年龄</label>
         </div>
       </div>
+
+      <div class="row">
+        <span style="margin-left: 10px;margin-right: 100px;">
+          <input name="gender" type="radio" id="man" />
+          <label for="man">男</label>
+        </span>
+        <span>
+          <input name="gender" type="radio" id="woman" />
+          <label for="woman">女</label>
+        </span>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+            <select name="user_group">
+                <option value="" disabled selected>职称</option>
+                <option value="1">讲师</option>
+                <option value="2">教授</option>
+                <option value="3">副教授</option>
+            </select>
+        </div>
+      </div>
+      
+      <!--<div class="row">-->
+        <!--<div class="input-field col s12">-->
+          <!--<textarea id="user-attr" name="user-attr" class="materialize-textarea user-data"></textarea>-->
+          <!--<label for="user-attr">用户属性</label>-->
+        <!--</div>-->
+      <!--</div>-->
+
+
       
       <button disabled class="btn waves-effect waves-light disabled add-user-submit" type="submit" name="action">
         提交
